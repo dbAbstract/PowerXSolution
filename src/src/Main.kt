@@ -40,23 +40,36 @@ fun findThirdLargest(inputList: Array<Int>): Int {
         if (num.toFloat() == firstMax || num.toFloat() == secondMax || num.toFloat() == thirdMax) continue
         when {
             firstMax == Float.NEGATIVE_INFINITY || num > firstMax -> {
+                /*
+                1. Assign the second-largest value to the third-largest pointer.
+                2. Assign the first-largest value to the second-largest pointer.
+                3. Assign the number to the largest pointer.
+                */
                 thirdMax = secondMax
                 secondMax = firstMax
                 firstMax = num.toFloat()
             }
 
             secondMax == Float.NEGATIVE_INFINITY || num > secondMax -> {
+                /*
+                1. Assign second-largest to third-largest pointer.
+                2. Assign second-largest with number.
+                 */
                 thirdMax = secondMax
                 secondMax = num.toFloat()
             }
 
             thirdMax == Float.NEGATIVE_INFINITY || num > thirdMax -> {
+                // Just assign third-largest number to pointer.
                 thirdMax = num.toFloat()
             }
         }
     }
     // This conversion can only throw exception if the list has < 3 elements which cannot happen because of the check before loop.
     return thirdMax.let {
-        if (it == Float.NEGATIVE_INFINITY) firstMax else it
+        if (it == Float.NEGATIVE_INFINITY) {
+            // Case: 3 distinct numbers not found in input.
+            firstMax
+        } else it
     }.toInt()
 }
