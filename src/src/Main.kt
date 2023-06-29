@@ -8,7 +8,9 @@ fun main() {
         arrayOf(5,5,5,5,5),
         arrayOf(4,2,8,5,3,9,1),
         arrayOf(-5,-3,-1,-19,-14),
-        arrayOf(3,1,3,2,2)
+        arrayOf(3,1,3,2,2),
+        arrayOf(5,4,3,2,1,19),
+        arrayOf(5,4,3,2,1)
     )
     testCases.forEach { testCase ->
         println("The third largest value for the list ${testCase.toList()} = \n\t${findThirdLargest(inputList = testCase)}")
