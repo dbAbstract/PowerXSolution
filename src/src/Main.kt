@@ -7,10 +7,11 @@ fun main() {
         arrayOf(-1,0,1,2,3),
         arrayOf(5,5,5,5,5),
         arrayOf(4,2,8,5,3,9,1),
-        arrayOf(-5,-3,-1,-19,-14)
+        arrayOf(-5,-3,-1,-19,-14),
+        arrayOf(3,1,3,2,2)
     )
     testCases.forEach { testCase ->
-        println("The third largest value for the list $testCase = \n\t${findThirdLargest(inputList = testCase)}")
+        println("The third largest value for the list ${testCase.toList()} = \n\t${findThirdLargest(inputList = testCase)}")
     }
 }
 
@@ -34,6 +35,7 @@ fun findThirdLargest(inputList: Array<Int>): Int {
     if (inputList.size <= 3) return inputList.min()
 
     for (num in inputList) {
+        if (num.toFloat() == firstMax || num.toFloat() == secondMax || num.toFloat() == thirdMax) continue
         when {
             firstMax == Float.NEGATIVE_INFINITY || num > firstMax -> {
                 thirdMax = secondMax
@@ -52,5 +54,7 @@ fun findThirdLargest(inputList: Array<Int>): Int {
         }
     }
     // This conversion can only throw exception if the list has < 3 elements which cannot happen because of the check before loop.
-    return thirdMax.toInt()
+    return thirdMax.let {
+        if (it == Float.NEGATIVE_INFINITY) firstMax else it
+    }.toInt()
 }
